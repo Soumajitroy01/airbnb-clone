@@ -25,7 +25,7 @@ app.use(cors({
   origin: 'http://127.0.0.1:5173',
 }));
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect('mongodb+srv://admin:Babi2003@cluster0.gcmabkc.mongodb.net/userdb?retryWrites=true&w=majority');
 
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
@@ -114,7 +114,7 @@ app.post('/upload', photosMiddleware.array('photos', 100), (req,res) => {
     const ext = parts[parts.length - 1];
     const newPath = path + '.' + ext;
     fs.renameSync(path, newPath);
-    uploadedFiles.push(newPath.replace('uploads/',''));
+    uploadedFiles.push(newPath.replace('uploads\\',''));
   }
   res.json(uploadedFiles);
 });
